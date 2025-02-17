@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxim <maxim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mberge <mberge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 01:00:41 by maxim             #+#    #+#             */
-/*   Updated: 2025/02/17 02:05:51 by maxim            ###   ########.fr       */
+/*   Updated: 2025/02/17 13:28:50 by mberge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void reverse_str(char *str, int n)
+void	reverse_str(char *str, int n)
 {
-	int start;
-	int end;
-	int tmp;
+	int	start;
+	int	end;
+	int	tmp;
 
 	start = 0;
 	end = n - 1;
@@ -30,11 +30,11 @@ void reverse_str(char *str, int n)
 	}
 }
 
-void add_minus_to_str(char *str)
+void	add_minus_to_str(char *str)
 {
-	char prev;
-	char current;
-	int i;
+	char	prev;
+	char	current;
+	int		i;
 
 	i = 0;
 	while (str[i])
@@ -57,12 +57,14 @@ void add_minus_to_str(char *str)
 }
 
 // 12 because max int is 2,147,483,647 (+1 for the -, +1 for /0)
-void ft_putnbr(int nb)
+void	ft_putnbr(int nb)
 {
-	char chars[12];
-	int i;
-	int is_negative;
+	char	chars[12];
+	int		i;
+	int		is_negative;
 
+	if (nb == -2147483648)
+		write(1, "-2147483648", 12);
 	is_negative = (nb < 0);
 	i = 0;
 	if (is_negative)
@@ -84,7 +86,7 @@ void ft_putnbr(int nb)
 	write(1, chars, i + 1);
 }
 
-int main()
-{
-	ft_putnbr(1234);
-}
+// int	main(void)
+// {
+// 	ft_putnbr(-2147483648);
+// }
