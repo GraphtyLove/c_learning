@@ -6,7 +6,7 @@
 /*   By: mberge <mberge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 13:27:31 by mberge            #+#    #+#             */
-/*   Updated: 2025/02/18 14:59:39 by mberge           ###   ########.fr       */
+/*   Updated: 2025/02/23 13:13:31 by mberge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,54 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+void	append_to_str(char *src, char *dest, char *sep, int add_sep)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(dest);
+	j = -1;
+	while (add_sep && sep[++j])
+		dest[i++] = sep[j];
+	j = -1;
+	while (src[++j])
+		dest[i++] = src[j];
+	dest[i] = '\0';
+}
+
+int	get_total_len(int size, char **strs, char *sep)
+{
+	int	total_len;
+	int	i;
+	int	j;
+	int	sep_chars_count;
+
+	total_len = 0;
+	i = -1;
+	sep_chars_count = ft_strlen(sep) - 1;
+	while (++i < size)
+	{
+		j = -1;
+		while (strs[i][++j])
+			total_len++;
+		if (i < size - 2)
+			total_len += sep_chars_count;
+	}
+	return (total_len + 1);
+}
+
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	int		a;
-	int		i;
-	int		j;
-	int		k;
+	char	*dest;
 	int		total_len;
-	char	*res;
+	int		i;
 
-	i = 0;
-	total_len = 0;
-	while (i < size)
-		total_len += ft_strlen(strs[i]);
-	i = 0;
-	k = 0;
-	res = (char *)malloc(sizeof(char) * (total_len + (ft_strlen(sep) * (size
-						- 1))));
-	while (i < size)
-	{
-		a = 0;
-		while (strs[i][a])
-		{
-			res[k] = strs[i][a];
-			k++;
-			a++;
-		}
-		if (i + 1 < size)
-		{
-			j = 0;
-			while (sep[j])
-			{
-				res[k] = sep[j];
-				k++;
-				j++;
-			}
-		}
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
+	total_len = get_total_len(size, strs, sep);
+	dest = (char *)malloc(sizeof(char) * total_len);
+	if (!dest)
+		return (NULL);
+	i = -1;
+	while (++i < size)
+		append_to_str(strs[i], dest, sep, (i != 0));
+	return (dest);
 }

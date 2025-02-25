@@ -6,7 +6,7 @@
 /*   By: mberge <mberge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 13:27:27 by mberge            #+#    #+#             */
-/*   Updated: 2025/02/18 14:37:35 by mberge           ###   ########.fr       */
+/*   Updated: 2025/02/23 13:14:34 by mberge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	ft_ultimate_range(int **range, int min, int max)
 {
-	int i;
-	int size;
+	int	i;
+	int	size;
 
 	if (min >= max)
 	{
